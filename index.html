@@ -36,16 +36,10 @@
             display: none;
             text-align: center;
             line-height: 1.6;
+            max-width: 400px; /* Ограничение ширины текста */
             padding: 20px;
-            border: 5px solid #FF6F61;
-            border-radius: 50%; /* Форма сердечка */
             background-color: #fff;
-            width: 300px; /* Размер окна */
-            height: 300px; /* Размер окна */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            border-radius: 10px; /* Легкие скругления углов */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         canvas {
@@ -56,10 +50,13 @@
             height: 100%;
             pointer-events: none;
         }
+        h1 {
+            display: none; /* Скрываем заголовок после завершения игры */
+        }
     </style>
 </head>
 <body>
-    <h1>❤️ Любимая, поймай эти 14 сердечек ❤️</h1>
+    <h1 id="start-title">❤️ Любимая, поймай эти 14 сердечек ❤️</h1>
     <div id="game">
         <!-- Сердечки будут добавлены случайным образом -->
     </div>
@@ -69,6 +66,7 @@
     <script>
         const game = document.getElementById('game');
         const message = document.getElementById('message');
+        const startTitle = document.getElementById('start-title');
         const heartCount = 14; // Количество сердечек
         let collected = 0;
 
@@ -100,6 +98,7 @@
 
         // Функция для показа сообщения
         function showMessage() {
+            startTitle.style.display = 'none'; // Скрываем стартовый заголовок
             message.innerHTML = `
                 💖 Моя Любимая Жена, 💖<br><br>
                 С Днём святого Валентина! ❤️<br>
@@ -110,7 +109,7 @@
                 как эти сердечки, которые сейчас падают вокруг тебя!<br><br>
                 С любовью, твой Мурк 😘
             `;
-            message.style.display = 'flex';
+            message.style.display = 'block';
         }
 
         // Функция для запуска анимации сердечек
