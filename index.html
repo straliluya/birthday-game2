@@ -50,12 +50,10 @@
             height: 100%;
             pointer-events: none;
         }
-        h1 {
-            display: none; /* Скрываем заголовок после завершения игры */
-        }
     </style>
 </head>
 <body>
+    <!-- Стартовая надпись -->
     <h1 id="start-title">❤️ Любимая, поймай эти 14 сердечек ❤️</h1>
     <div id="game">
         <!-- Сердечки будут добавлены случайным образом -->
@@ -112,7 +110,7 @@
             message.style.display = 'block';
         }
 
-        // Функция для запуска анимации сердечек
+        // Функция для запуска анимации падающих сердечек
         function startHeartsAnimation() {
             const duration = 5 * 1000; // 5 секунд
             const animationEnd = Date.now() + duration;
