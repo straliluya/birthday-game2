@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f9f9f9;
+            background-color: #FFD1DC; /* Розовый фон */
             margin: 0;
             padding: 0;
             display: flex;
@@ -30,8 +30,8 @@
             50% { transform: translateY(-10px); }
         }
         #message {
-            font-size: 1.5em;
-            color: red;
+            font-size: 1.2em;
+            color: #333; /* Не красный текст */
             margin-top: 20px;
             display: none;
             text-align: center;
@@ -48,9 +48,6 @@
             flex-direction: column;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        h1 {
-            color: #333;
-        }
         canvas {
             position: absolute;
             top: 0;
@@ -62,7 +59,7 @@
     </style>
 </head>
 <body>
-    <h1>Мурь, потыкай на сердечки ❤️</h1>
+    <h1>❤️ Любимая, поймай эти 14 сердечек ❤️</h1>
     <div id="game">
         <!-- Сердечки будут добавлены случайным образом -->
     </div>
@@ -72,7 +69,7 @@
     <script>
         const game = document.getElementById('game');
         const message = document.getElementById('message');
-        const heartCount = 15; // Количество сердечек
+        const heartCount = 14; // Количество сердечек
         let collected = 0;
 
         // Функция для создания случайных позиций
