@@ -50,6 +50,17 @@
             height: 100%;
             pointer-events: none;
         }
+        /* Анимация пульсирующих сердечек */
+        .pulsing-heart {
+            position: absolute;
+            font-size: 50px;
+            color: #FF6F61;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
     </style>
 </head>
 <body>
@@ -59,8 +70,6 @@
         <!-- Сердечки будут добавлены случайным образом -->
     </div>
     <div id="message"></div>
-    <canvas id="confetti"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
         const game = document.getElementById('game');
         const message = document.getElementById('message');
@@ -110,40 +119,32 @@
             message.style.display = 'block';
         }
 
-        // Функция для запуска анимации падающих сердечек
+        // Функция для запуска анимации пульсирующих сердечек
         function startHeartsAnimation() {
             const duration = 5 * 1000; // 5 секунд
             const animationEnd = Date.now() + duration;
-            const defaults = { 
-                startVelocity: 30, 
-                spread: 360, 
-                ticks: 60, 
-                zIndex: 0,
-                shapes: ['circle'], // Только круги (сердечки)
-                colors: ['#FF6F61', '#FF4D3A', '#FFD700', '#FFFFFF'] // Цвета сердечек
-            };
 
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
+            function createPulsingHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('pulsing-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000); // Удаляем сердечко через 2 секунды
             }
 
             const interval = setInterval(() => {
                 const timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) {
-                    return clearInterval(interval);
+                    clearInterval(interval);
+                } else {
+                    createPulsingHeart();
                 }
-                const particleCount = 50 * (timeLeft / duration);
-                confetti({
-                    ...defaults,
-                    particleCount,
-                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-                });
-                confetti({
-                    ...defaults,
-                    particleCount,
-                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-                });
-            }, 250);
+            }, 200); // Создаем новое сердечко каждые 200 мс
         }
     </script>
 </body>
